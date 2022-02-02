@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+  bookmedik:
+    container_name: bookmedik
+    image: larapruna/bookmedik:v3
+    restart: always
+    environment:
+      DB_HOST: mariadb
+      DB_USER: usuario
+      DB_PASSWORD: usuario
+      DB_NAME: bookmedik
+    ports:
+      - 8081:80
+    volumes:
+      - bookmedik_data:/usr/share/nginx/html
+    depends_on:
+      - db
+      - phpfpm
+  db:
+    container_name: mariadb
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: bookmedik
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: usuario
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mariadb_data:/var/lib/mysql
+  phpfpm:
+    container_name: phpfpm
+    image: larapruna/phpfpm
+    restart: always
+    environment:
+      DB_HOST: mariadb
+      DB_USER: usuario
+      DB_PASSWORD: usuario
+      DB_NAME: bookmedik
+    volumes:
+      - bookmedik_data:/usr/share/nginx/html
+volumes:
+    mariadb_data:
+    bookmedik_data:

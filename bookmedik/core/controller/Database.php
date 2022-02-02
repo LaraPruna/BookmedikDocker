@@ -3,7 +3,7 @@ class Database {
 	public static $db;
 	public static $con;
 	function Database(){
-		$this->user=getenv(DB_USER);$this->pass=getenv(DB_PASSWORD);$this->host=getenv(DB_HOST);$this->ddbb=getenv(BD_NAME);
+		$this->user=getenv(DB_USER);$this->pass=getenv(DB_PASSWORD);$this->host=getenv(DB_HOST);$this->ddbb=getenv(DB_NAME);
 	}
 
 	function connect(){
